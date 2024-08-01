@@ -1,5 +1,8 @@
 {
     "yaml.schemas": {
-        "https://raw.githubusercontent.com/thibaultfalque/metrics-solver/main/.solver.schema.json": "*.solver.yaml"
+        "https://raw.githubusercontent.com/thibaultfalque/metrics-solver/main/.solver.schema.json": [
+            "*.solver.yaml",
+            "file:///home/falque/Travail/Research/Tools/metrics/metrics-solvers/ace.solver.yaml"
+        ]
     }
 }
