@@ -107,7 +107,11 @@
                       ]
                     }
                   },
-                  "required": ["file", "pattern"],
+                  "required": ["file"],
+                  "oneOf": [
+                    {"required": ["pattern"]},
+                    {"required": ["regex"]}
+                  ],
                   "additionalProperties": false
                 }
               }
