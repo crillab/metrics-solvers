@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/thibaultfalque/metrics-solver/main/.solver.schema.json": "*.solver.yaml"
+    }
+}
