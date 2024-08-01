@@ -1,0 +1,124 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "id": {
+        "type": "string"
+      },
+      "git": {
+        "type": "string",
+        "format": "uri"
+      },
+      "build_command": {
+        "type": "string"
+      },
+      "language": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "command_line": {
+        "type": "string"
+      },
+      "options": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "versions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "alias": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "git_tag": {
+              "type": "string"
+            },
+            "executable": {
+              "type": "string"
+            }
+          },
+          "required": ["version", "git_tag", "executable"],
+          "additionalProperties": false
+        }
+      },
+      "parsing": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "raw-data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "log-data": {
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string"
+                    },
+                    "pattern": {
+                      "type": "string"
+                    },
+                    "regex": {
+                      "type": "string"
+                    },
+                    "groups": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "bound_list": {
+                              "type": "integer"
+                            },
+                            "timestamp_list": {
+                              "type": "integer"
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "required": ["file", "pattern"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required": ["name", "id", "git", "build_command", "language", "tags", "command_line", "options", "versions", "parsing"],
+    "additionalProperties": false
+  }
+  
