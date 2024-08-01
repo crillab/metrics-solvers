@@ -1,0 +1,49 @@
+name: "ACE"
+id: "fr.cril.xcsp.ace"
+git: "https://github.com/xcsp3team/ace"
+build_command: "gradle build -x test"
+language: "java"
+tags: 
+  - cp
+  - cop
+  - integer 
+command_line: "{{executable}} {{instance}} {{options}}"
+options: 
+  time: "-t"
+versions: 
+  - version: "2.3"
+    alias:
+      - "latest"
+    git_tag: "2.3"
+    executable: "build/lib/ACE-2.3.jar"
+  - version: "2.3dev"
+    alias:
+      - "dev"
+    git_tag: "5130cb8"
+    executable: "build/lib/ACE-2.3.jar"
+parsing:
+  data:
+    raw-data:
+    - log-data: answer
+      file: "execution.out"
+      pattern: 's {any}'
+    - log-data: status
+      file: "execution.out"
+      pattern: "d {word} EXPLORATION"
+    - log-data: objective
+      file: "execution.out"
+      pattern: "way={word}"
+    - file: "execution.out"
+      pattern: "o {integer} \t{real}"
+      groups:
+        bound_list: 1
+        timestamp_list: 2
+    - log-data: solution_list
+      file: "execution.out"
+      regex: 'v <instantiation .*> <list> .* </list> <values> (.*) </values> </instantiation>'
+      groups:
+        - 1
+    - log-data: best_bound
+      file: "execution.out"
+      pattern: "d BOUND {integer}"
+
