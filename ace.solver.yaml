@@ -6,14 +6,24 @@ language: "java"
 tags: 
   - cp
   - cop
-  - integer 
-command_line: "{{executable}} {{instance}} {{options}}"
-options: 
-  time: "-t"
+  - integer
+command_line_prefix: "java -jar" 
+command_line: "{{instance}} {{options}}"
+always_include_options: "-npc=true -ev"
+std_options: 
+  time: "-t={value}"
+  seed: "-seed={value}"
+  all_solutions: "-s=all"
+  number_of_solutions: "-s={value}"
+  verbosity: "-v={value}"
+  print_intermediate_solutions: "-xe={value}"
 versions: 
-  - version: "2.3"
+  - version: "2.4"
     alias:
       - "latest"
+    executable: "build/lib/ACE-2.4.jar"
+    git_tag: "2.4"
+  - version: "2.3"
     git_tag: "2.3"
     executable: "build/lib/ACE-2.3.jar"
   - version: "2.3dev"
@@ -25,25 +35,25 @@ parsing:
   data:
     raw-data:
     - log-data: answer
-      file: "execution.out"
+      file: "xpware.out"
       pattern: 's {any}'
     - log-data: status
-      file: "execution.out"
+      file: "xpware.out"
       pattern: "d {word} EXPLORATION"
     - log-data: objective
-      file: "execution.out"
+      file: "xpware.out"
       pattern: "way={word}"
-    - file: "execution.out"
+    - file: "xpware.out"
       pattern: "o {integer} \t{real}"
       groups:
         bound_list: 1
         timestamp_list: 2
     - log-data: solution_list
-      file: "execution.out"
+      file: "xpware.out"
       regex: 'v <instantiation .*> <list> .* </list> <values> (.*) </values> </instantiation>'
       groups:
         - 1
     - log-data: best_bound
-      file: "execution.out"
+      file: "xpware.out"
       pattern: "d BOUND {integer}"
 
