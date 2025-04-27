@@ -60,5 +60,3 @@ parsing:
     - log-data: best_bound
       file: "xpware.out"
       pattern: "d BOUND {integer}"
-
-supported_formats: ["XCSP3"]
