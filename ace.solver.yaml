@@ -25,14 +25,14 @@ command:
 versions:
   - version: "2.4"
     alias: ["latest"]
-    executable: "build/lib/ACE-2.4.jar"
+    executable: "build/libs/ACE-2.4.jar"
     git_tag: "2.4"
   - version: "2.3"
-    executable: "build/lib/ACE-2.3.jar"
+    executable: "build/libs/ACE-2.3.jar"
     git_tag: "2.3"
   - version: "2.3dev"
     alias: ["dev"]
-    executable: "build/lib/ACE-2.3.jar"
+    executable: "build/libs/ACE-2.3.jar"
     git_tag: "5130cb8"
 
 parsing:
