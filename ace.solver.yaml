@@ -11,7 +11,7 @@ build:
   build_command: "gradle build -x test"
 
 command:
-  prefix: "java -jar"
+  prefix: "{{java}} -jar"
   template: "{{executable}} {{instance}} {{options}}"
   always_include_options: "-npc=true -ev"
   options:
