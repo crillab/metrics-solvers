@@ -1,158 +1,106 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-      "extends": {
-        "type": "string"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "id": { "type": "string" },
+    "description": { "type": "string" },
+    "git": { "type": "string", "format": "uri" },
+    "language": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "build": {
+      "type": "object",
+      "properties": {
+        "mode": { "type": "string", "enum": ["manual", "auto"] },
+        "build_command": { "type": "string" }
       },
-        "name": {
-        "type": "string"
-      },
-      "id": {
-        "type": "string"
-      },
-      "git": {
-        "type": "string",
-        "format": "uri"
-      },
-      "build_command": {
-        "type": "string"
-      },
-      "language": {
-        "type": "string"
-      },
-      "tags": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
-      "command_line_prefix": {
-        "type": "string"
-      },
-      "command_line": {
-        "type": "string"
-      },
-      "always_include_options": {
-        "type": "string"
-      },
-      "std_options": {
-        "type": "object",
-        "properties": {
-          "time": {
-              "type": "string"
-            },
-            "memory": {
-              "type": "string"
-            },
-            "cores": {
-              "type": "string"
-            },
-            "seed": {
-              "type": "string"
-            },
-            "all_solutions":{
-              "type": "string"
-            },
-            "number_of_solutions":{
-              "type": "string"
-            },
-            "verbosity":{
-              "type": "string"
-            },
-            "print_intermediate_solutions":{
-              "type": "string"
-            }
-        },
-        "additionalProperties": false
-      },
-      "versions": {
-        "type": "array",
-        "items": {
+      "required": ["mode"],
+      "additionalProperties": false
+    },
+    "command": {
+      "type": "object",
+      "properties": {
+        "prefix": { "type": "string" },
+        "template": { "type": "string" },
+        "always_include_options": { "type": "string" },
+        "options": {
           "type": "object",
           "properties": {
-            "version": {
-              "type": "string"
-            },
-            "alias": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "git_tag": {
-              "type": "string"
-            },
-            "executable": {
-              "type": "string"
-            }
+            "time": { "type": "string" },
+            "seed": { "type": "string" },
+            "all_solutions": { "type": "string" },
+            "number_of_solutions": { "type": "string" },
+            "verbosity": { "type": "string" },
+            "print_intermediate_solutions": { "type": "string" }
           },
-          "required": ["version", "git_tag", "executable"],
           "additionalProperties": false
         }
       },
-      "parsing": {
+      "required": ["template"],
+      "additionalProperties": false
+    },
+    "versions": {
+      "type": "array",
+      "items": {
         "type": "object",
         "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "raw-data": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "log-data": {
-                      "type": "string"
-                    },
-                    "file": {
-                      "type": "string"
-                    },
-                    "pattern": {
-                      "type": "string"
-                    },
-                    "regex": {
-                      "type": "string"
-                    },
-                    "groups": {
-                      "oneOf": [
-                        {
-                          "type": "object",
-                          "properties": {
-                            "bound_list": {
-                              "type": "integer"
-                            },
-                            "timestamp_list": {
-                              "type": "integer"
-                            }
-                          },
-                          "additionalProperties": false
-                        },
-                        {
-                          "type": "array",
-                          "items": {
-                            "type": "integer"
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  "required": ["file"],
-                  "oneOf": [
-                    {"required": ["pattern"]},
-                    {"required": ["regex"]}
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            },
-            "additionalProperties": false
-          }
+          "version": { "type": "string" },
+          "alias": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "executable": { "type": "string" },
+          "git_tag": { "type": "string" }
         },
+        "required": ["version", "git_tag", "executable"],
         "additionalProperties": false
       }
     },
-    "required": ["name", "id", "git", "command_line", "options", "versions"],
-    "additionalProperties": false
-  }
-  
+    "parsing": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "log-data": { "type": "string" },
+              "file": { "type": "string" },
+              "pattern": { "type": "string" },
+              "regex": { "type": "string" },
+              "groups": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "bound_list": { "type": "integer" },
+                      "timestamp_list": { "type": "integer" }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "array",
+                    "items": { "type": "integer" }
+                  }
+                ]
+              }
+            },
+            "required": ["file"],
+            "oneOf": [
+              { "required": ["pattern"] },
+              { "required": ["regex"] }
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["data"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["name", "id", "git", "language", "build"],
+  "additionalProperties": false
+}
