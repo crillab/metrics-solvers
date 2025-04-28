@@ -64,7 +64,7 @@ This is a special section that corresponds to the [`data` part](https://metrics.
 
 # 📣 Notes
 
-- Placeholders in the command template are enclosed in double curly braces: `{{executable}}`, `{{instance}}`, `{{options}}`.
+- Placeholders in the command template are enclosed in double curly braces: `{{executable}}`, `{{instance}}`, `{{options}}`, `{{java}}`, `{{python}}`.
 - `versions` allows supporting multiple tagged releases of a solver without re-downloading the full source each time.
 
 ---
