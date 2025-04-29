@@ -39,7 +39,7 @@ Standard options that can be customized:
 - `all_solutions`
 - `number_of_solutions`
 - `verbosity`
-- `print_intermediate_solutions`
+- `print_intermediate_assignment`
 
 ---
 
