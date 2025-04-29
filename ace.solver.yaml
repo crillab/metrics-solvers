@@ -15,11 +15,11 @@ command:
   template: "{{executable}} {{instance}} {{options}}"
   always_include_options: "-npc=true -ev"
   options:
-    time: "-t={value}"
-    seed: "-seed={value}"
+    time: "-t={{value}}"
+    seed: "-seed={{value}}"
     all_solutions: "-s=all"
-    number_of_solutions: "-s={value}"
-    verbosity: "-v={value}"
+    number_of_solutions: "-s={{value}}"
+    verbosity: "-v={{value}}"
     print_intermediate_solutions: "-xe"
 
 versions:
