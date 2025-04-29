@@ -15,12 +15,12 @@ command:
   template: "{{executable}} {{instance}} {{options}}"
   always_include_options: "-npc=true -ev"
   options:
-    time: "-t={{value}}"
+    time: "-t={{value}}s"
     seed: "-seed={{value}}"
     all_solutions: "-s=all"
     number_of_solutions: "-s={{value}}"
     verbosity: "-v={{value}}"
-    print_intermediate_solutions: "-xe"
+    print_intermediate_assignment: "-xe"
 
 versions:
   - version: "2.4"
@@ -30,10 +30,10 @@ versions:
   - version: "2.3"
     executable: "build/libs/ACE-2.3.jar"
     git_tag: "2.3"
-  - version: "2.3dev"
+  - version: "2.4dev"
     alias: ["dev"]
-    executable: "build/libs/ACE-2.3.jar"
-    git_tag: "5130cb8"
+    executable: "build/libs/ACE-2.4.jar"
+    git_tag: "c61dd75"
 
 parsing:
   data:
