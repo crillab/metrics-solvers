@@ -20,7 +20,7 @@ command:
     all_solutions: "-s=all"
     number_of_solutions: "-s={value}"
     verbosity: "-v={value}"
-    print_intermediate_solutions: "-xe={value}"
+    print_intermediate_solutions: "-xe"
 
 versions:
   - version: "2.4"
