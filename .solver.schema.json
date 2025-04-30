@@ -5,17 +5,33 @@
     "name": { "type": "string" },
     "id": { "type": "string" },
     "description": { "type": "string" },
-    "git": { "type": "string", "format": "uri" },
     "language": { "type": "string" },
     "tags": {
       "type": "array",
       "items": { "type": "string" }
     },
+    "system": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      ]
+    },
     "build": {
       "type": "object",
       "properties": {
         "mode": { "type": "string", "enum": ["manual", "auto"] },
-        "build_command": { "type": "string" }
+        "build_command": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          ]
+        }
       },
       "required": ["mode"],
       "additionalProperties": false
@@ -29,12 +45,12 @@
         "options": {
           "type": "object",
           "properties": {
-            "time": { "type": "string" },
-            "seed": { "type": "string" },
-            "all_solutions": { "type": "string" },
-            "number_of_solutions": { "type": "string" },
-            "verbosity": { "type": "string" },
-            "print_intermediate_solutions": { "type": "string" }
+            "time": { "type": ["string", "null"] },
+            "seed": { "type": ["string", "null"] },
+            "all_solutions": { "type": ["string", "null"] },
+            "number_of_solutions": { "type": ["string", "null"] },
+            "verbosity": { "type": ["string", "null"] },
+            "print_intermediate_assignment": { "type": ["string", "null"] }
           },
           "additionalProperties": false
         }
@@ -99,8 +115,14 @@
       },
       "required": ["data"],
       "additionalProperties": false
-    }
+    },
+    "git": { "type": "string", "format": "uri" },
+    "path": { "type": "string" }
   },
-  "required": ["name", "id", "git", "language","system", "build","versions"],
+  "required": ["name", "id", "language", "system", "build", "versions"],
+  "oneOf": [
+    { "required": ["git"], "not": { "required": ["path"] } },
+    { "required": ["path"], "not": { "required": ["git"] } }
+  ],
   "additionalProperties": false
 }
