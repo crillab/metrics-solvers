@@ -5,6 +5,7 @@ git: "https://github.com/xcsp3team/ace"
 
 language: "java"
 tags: ["cp", "cop", "integer"]
+system: all
 
 build:
   mode: manual
@@ -46,8 +47,7 @@ parsing:
     - log-data: objective
       file: "xpware.out"
       pattern: "way={word}"
-    - log-data: bound_list
-      file: "xpware.out"
+    - file: "xpware.out"
       pattern: "o {integer} \\t{real}"
       groups:
         bound_list: 1

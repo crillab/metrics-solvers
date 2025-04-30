@@ -1,0 +1,54 @@
+name: "COSOCO"
+id: "fr.cril.xcsp.cosoco"
+description: "COSOCO: A COmpact SOlver for COnstrained problems"
+git: "https://github.com/xcsp3team/cosoco"
+
+language: "cpp"
+tags: ["cp", "cop", "integer"]
+system: 
+  - "Linux"
+  - "macOS"
+build:
+  mode: manual
+  build_command:
+    - "cd {{SOLVER_DIR}}/../ && git clone https://github.com/xcsp3team/XCSP3-CPP-Parser.git"
+    - 'cd {{SOLVER_DIR}}/../XCSP3-CPP-Parser && {{cmake}} -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" . && {{cmake}} --build . --target cosoco -- -j 8'
+    - 'cd {{SOLVER_DIR}} && {{cmake}} -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" . && {{cmake}} --build . --target cosoco -- -j 8'
+command:
+  template: "{{executable}} {{instance}} {{options}}"
+  always_include_options: "-colors=0 "
+  options:
+    time: "-cpu_lim={{value}}"
+    seed: null
+    all_solutions: null
+    number_of_solutions: "-nbsols={{value}}"
+    verbosity: "-verb={{value}}"
+    print_intermediate_assignment: null
+
+versions:
+  - version: "latest"
+    executable: "main/cosoco"
+    git_tag: "40f8b0a"
+  - version: "2.4"
+    alias: ["xcsp24"]
+    executable: "main/cosoco"
+    git_tag: "2.4"
+
+parsing:
+  data:
+    - log-data: answer
+      file: "xpware.out"
+      pattern: "s {any}"
+    - file: "xpware.out"
+      pattern: "o {integer} {real}"
+      groups:
+        bound_list: 1
+        timestamp_list: 2
+    - log-data: solution_list
+      file: "xpware.out"
+      regex: "v <instantiation .*> <list> .* </list> <values> (.*) </values> </instantiation>"
+      groups:
+        - 1
+    - log-data: best_bound
+      file: "xpware.out"
+      pattern: "c best bound : {integer}"
