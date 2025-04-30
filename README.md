@@ -14,6 +14,7 @@ These configuration files describe how to install, build, and run various constr
 ## 📚 Available Solver Configurations
 
 - [ACE](./ace.solver.yaml) — Configuration for the [ACE](https://github.com/xcsp3team/ace) constraint programming solver.
+- [Cosoco](./cosoco.solver.yaml) — Configuration for the [COSOCO](https://github.com/xcsp3team/cosoco) constraint programming solver.
 
 *(Additional solvers will be added progressively.)*
 
