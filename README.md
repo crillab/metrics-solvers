@@ -4,7 +4,7 @@ This repository provides a curated collection of solver configuration files for 
 
 - [Metrics](https://github.com/crilllab/metrics) ([Documentation](https://metrics.readthedocs.io)):  
   An open-source Python library to automate experiments and analyze solver performance.
-- [XCSP-Launcher](https://github.com/thibaultfalque/xcsp-launcher):  
+- [XCSP-Launcher](https://github.com/CPToolset/xcsp-launcher):  
   A tool for installing, managing, and executing solvers supporting the XCSP3 format.
 
 These configuration files describe how to install, build, and run various constraint programming solvers.
