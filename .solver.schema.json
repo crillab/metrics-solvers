@@ -101,6 +101,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["name", "id", "git", "language", "build"],
+  "required": ["name", "id", "git", "language","system", "build","versions"],
   "additionalProperties": false
 }
