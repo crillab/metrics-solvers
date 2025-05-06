@@ -31,9 +31,25 @@
               "items": { "type": "string" }
             }
           ]
+        },
+        "build_steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "cmd": { "type": "string" },
+              "cwd": { "type": "string" }
+            },
+            "required": ["cmd"],
+            "additionalProperties": false
+          }
         }
       },
       "required": ["mode"],
+      "oneOf": [
+        { "required": ["build_command"], "not": { "required": ["build_steps"] } },
+        { "required": ["build_steps"], "not": { "required": ["build_command"] } }
+      ],
       "additionalProperties": false
     },
     "command": {
