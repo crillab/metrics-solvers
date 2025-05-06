@@ -43,6 +43,18 @@
             "required": ["cmd"],
             "additionalProperties": false
           }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "git": { "type": "string", "format": "uri" },
+              "dir": { "type": "string" }
+            },
+            "required": ["git"],
+            "additionalProperties": false
+          }
         }
       },
       "required": ["mode"],
