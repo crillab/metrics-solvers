@@ -14,7 +14,7 @@ build:
     - git: https://github.com/xcsp3team/XCSP3-CPP-Parser.git
       dir: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser/"
   build_steps:
-    - cmd: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser/build.sh"
+    - cmd: "bash {{SOLVER_DIR}}/../XCSP3-CPP-Parser/build.sh"
       cwd: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser"
     - cmd: "{{cmake}} -DCMAKE_BUILD_TYPE=Release -G 'Unix Makefiles' ."
       cwd: "{{SOLVER_DIR}}"
