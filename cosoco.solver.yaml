@@ -12,7 +12,7 @@ build:
   mode: manual
   build_command:
     - "cd {{SOLVER_DIR}}/../ && git clone https://github.com/xcsp3team/XCSP3-CPP-Parser.git"
-    - 'cd {{SOLVER_DIR}}/../XCSP3-CPP-Parser && {{cmake}} -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" . && {{cmake}} --build . --target cosoco -- -j 8'
+    - 'cd {{SOLVER_DIR}}/../XCSP3-CPP-Parser && {{cmake}} -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" . && {{cmake}} --build . --target all -- -j 8'
     - 'cd {{SOLVER_DIR}} && {{cmake}} -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" . && {{cmake}} --build . --target cosoco -- -j 8'
 command:
   template: "{{executable}} {{instance}} {{options}}"
