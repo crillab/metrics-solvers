@@ -10,19 +10,14 @@ system:
   - "macOS"
 build:
   mode: manual
+  dependencies:
+    - git: https://github.com/xcsp3team/XCSP3-CPP-Parser.git
+      dir: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser/"
   build_steps:
-    - cmd: "git clone https://github.com/xcsp3team/XCSP3-CPP-Parser.git"
-      cwd: "{{SOLVER_DIR}}/../"
-
-    - cmd: "{{cmake}} -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' ."
+    - cmd: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser/build.sh"
       cwd: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser"
-
-    - cmd: "{{cmake}} --build . --target all -- -j 8"
-      cwd: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser"
-
     - cmd: "{{cmake}} -DCMAKE_BUILD_TYPE=Release -G 'Unix Makefiles' ."
       cwd: "{{SOLVER_DIR}}"
-
     - cmd: "{{cmake}} --build . --target cosoco -- -j 8"
       cwd: "{{SOLVER_DIR}}"
 
@@ -31,16 +26,13 @@ command:
   always_include_options: "-colors=0 "
   options:
     time: "-cpu_lim={{value}}"
-    seed: null
-    all_solutions: null
     number_of_solutions: "-nbsols={{value}}"
     verbosity: "-verb={{value}}"
-    print_intermediate_assignment: null
 
 versions:
   - version: "latest"
     executable: "main/cosoco"
-    git_tag: "40f8b0a"
+    git_tag: "main"
   - version: "2.4"
     alias: ["xcsp24"]
     executable: "main/cosoco"
