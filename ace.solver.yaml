@@ -24,6 +24,9 @@ command:
     print_intermediate_assignment: "-xe"
 
 versions:
+  - version: "2.5"
+    executable: "build/libs/ACE-2.5.jar"
+    git_tag: "2.5"
   - version: "2.4"
     alias: ["latest"]
     executable: "build/libs/ACE-2.4.jar"
@@ -31,10 +34,6 @@ versions:
   - version: "2.3"
     executable: "build/libs/ACE-2.3.jar"
     git_tag: "2.3"
-  - version: "2.4dev"
-    alias: ["dev"]
-    executable: "build/libs/ACE-2.4.jar"
-    git_tag: "c61dd75"
 
 parsing:
   data:
