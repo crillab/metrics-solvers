@@ -13,9 +13,15 @@ build:
   dependencies:
     - git: https://github.com/xcsp3team/XCSP3-CPP-Parser.git
       dir: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser/"
+    - git: https://github.com/crillab/pfactory.git
+      dir: "{{SOLVER_DIR}}/../pfactory/"
   build_steps:
     - cmd: "{{bash}} {{SOLVER_DIR}}/../XCSP3-CPP-Parser/build.sh"
       cwd: "{{SOLVER_DIR}}/../XCSP3-CPP-Parser"
+    - cmd: "{{bash}} {{SOLVER_DIR}}/../pfactory/bootstrap"
+      cwd: "{{SOLVER_DIR}}/../pfactory"
+    - cmd : "make"
+      cwd: "{{SOLVER_DIR}}/../pfactory"
     - cmd: "{{cmake}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -G 'Unix Makefiles' ."
       cwd: "{{SOLVER_DIR}}"
     - cmd: "{{cmake}} --build . --target cosoco -- -j 8"
@@ -33,6 +39,10 @@ versions:
   - version: "latest"
     executable: "main/cosoco"
     git_tag: "main"
+  - version: "2.5"
+    alias: [ "xcsp25" ]
+    executable: "main/cosoco"
+    git_tag: "2.5"
   - version: "2.4"
     alias: ["xcsp24"]
     executable: "main/cosoco"
