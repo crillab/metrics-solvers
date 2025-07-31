@@ -1,6 +1,6 @@
 {
     "yaml.schemas": {
-        "https://raw.githubusercontent.com/crillab/metrics-solver/main/.solver.schema.json": [
+        "https://raw.githubusercontent.com/crillab/metrics-solvers/refs/heads/main/.solver.schema.json": [
             "*.solver.yaml",
             "file:///home/falque/Travail/Research/Tools/metrics/metrics-solvers/ace.solver.yaml"
         ]
