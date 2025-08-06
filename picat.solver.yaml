@@ -1,0 +1,36 @@
+name: "Picat"
+id: "org.picat"
+description: "Picat is a simple, and yet powerful, logic-based multi-paradigm programming language aimed for general-purpose applications."
+website: "https://picat-lang.org/"
+
+language: "c"
+tags: ["cp", "cop", "integer"]
+system: all
+
+build:
+  dependencies:
+    - url: https://picat-lang.org/download/xcsp.pi
+      dir: "{{SOLVER_DIR}}/lib/xcsp.pi"
+  per_os:
+    linux:
+      skip: true
+    windows:
+      skip: true
+    macos:
+      steps:
+        - cmd: "make -f Makefile.mac64"
+          cwd: "{{SOLVER_DIR}}/emu"
+command:
+  template: "{{executable}} {{bin_dir}}/xcsp.pi {{instance}}"
+
+versions:
+  - version: "3.8#7"
+    alias: ["stable"]
+    urls:
+      linux: https://picat-lang.org/download/picat387_linux64.tar.gz
+      macos: https://picat-lang.org/download/picat387_src.tar.gz
+      windows: https://picat-lang.org/download/picat387_mingw64.zip
+    executable: "picat"
+    files:
+      - from: "{{SOLVER_DIR}}/lib/xcsp.pi"
+        to: "{{bin_dir}}/xcsp.pi"

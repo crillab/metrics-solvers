@@ -5,6 +5,7 @@
     "name": { "type": "string" },
     "id": { "type": "string" },
     "description": { "type": "string" },
+    "website": { "type": "string", "format": "uri" },
     "language": { "type": "string" },
     "tags": {
       "type": "array",
@@ -23,16 +24,7 @@
       "type": "object",
       "properties": {
         "mode": { "type": "string", "enum": ["manual", "auto"] },
-        "build_command": {
-          "oneOf": [
-            { "type": "string" },
-            {
-              "type": "array",
-              "items": { "type": "string" }
-            }
-          ]
-        },
-        "build_steps": {
+        "default_steps": {
           "type": "array",
           "items": {
             "type": "object",
@@ -44,24 +36,43 @@
             "additionalProperties": false
           }
         },
+        "per_os": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "cmd": { "type": "string" },
+                    "cwd": { "type": "string" }
+                  },
+                  "required": ["cmd"],
+                  "additionalProperties": false
+                }
+              },
+              "skip": { "type": "boolean" }
+            },
+            "additionalProperties": false
+          }
+        },
         "dependencies": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "git": { "type": "string", "format": "uri" },
+              "url": { "type": "string", "format": "uri" },
               "dir": { "type": "string" }
             },
-            "required": ["git"],
+            "required": ["dir"],
             "additionalProperties": false
           }
         }
       },
       "required": ["mode"],
-      "oneOf": [
-        { "required": ["build_command"], "not": { "required": ["build_steps"] } },
-        { "required": ["build_steps"], "not": { "required": ["build_command"] } }
-      ],
       "additionalProperties": false
     },
     "command": {
@@ -72,15 +83,7 @@
         "always_include_options": { "type": "string" },
         "options": {
           "type": "object",
-          "properties": {
-            "time": { "type": ["string", "null"] },
-            "seed": { "type": ["string", "null"] },
-            "all_solutions": { "type": ["string", "null"] },
-            "number_of_solutions": { "type": ["string", "null"] },
-            "verbosity": { "type": ["string", "null"] },
-            "print_intermediate_assignment": { "type": ["string", "null"] }
-          },
-          "additionalProperties": false
+          "additionalProperties": { "type": ["string", "null"] }
         }
       },
       "required": ["template"],
@@ -97,9 +100,26 @@
             "items": { "type": "string" }
           },
           "executable": { "type": "string" },
-          "git_tag": { "type": "string" }
+          "git_tag": { "type": "string" },
+          "source": { "type": "string", "enum": ["git", "archive"] },
+          "urls": {
+            "type": "object",
+            "additionalProperties": { "type": "string", "format": "uri" }
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": { "type": "string" },
+                "to": { "type": "string" }
+              },
+              "required": ["from", "to"],
+              "additionalProperties": false
+            }
+          }
         },
-        "required": ["version", "git_tag", "executable"],
+        "required": ["version", "executable"],
         "additionalProperties": false
       }
     },

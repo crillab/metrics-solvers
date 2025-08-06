@@ -9,7 +9,9 @@ system: all
 
 build:
   mode: manual
-  build_command: "gradle build -x test"
+  default_steps:
+    - cmd: "gradle build -x test"
+      cwd: "{{SOLVER_DIR}}"
 
 command:
   prefix: "{{java}} -jar"
@@ -25,15 +27,15 @@ command:
 
 versions:
   - version: "2.5"
-    executable: "build/libs/ACE-2.5.jar"
     git_tag: "2.5"
-  - version: "2.4"
+    executable: "build/libs/ACE-2.5.jar"
     alias: ["latest"]
-    executable: "build/libs/ACE-2.4.jar"
+  - version: "2.4"
     git_tag: "2.4"
+    executable: "build/libs/ACE-2.4.jar"
   - version: "2.3"
-    executable: "build/libs/ACE-2.3.jar"
     git_tag: "2.3"
+    executable: "build/libs/ACE-2.3.jar"
 
 parsing:
   data:
